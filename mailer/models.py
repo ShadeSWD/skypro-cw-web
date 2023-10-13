@@ -6,6 +6,7 @@ NULLABLE = {'blank': True, 'null': True}
 
 class Client(models.Model):
     created_at = models.DateTimeField(verbose_name='creation date', auto_now_add=True)
+    changed_at = models.DateTimeField(verbose_name='change date', auto_now=True)
     email = models.CharField(max_length=50, verbose_name='email', unique=True)
     name = models.CharField(max_length=150, verbose_name='name')
     surname = models.CharField(max_length=150, verbose_name='surname')
@@ -15,6 +16,7 @@ class Client(models.Model):
 
 class Message(models.Model):
     created_at = models.DateTimeField(verbose_name='creation date', auto_now_add=True)
+    changed_at = models.DateTimeField(verbose_name='change date', auto_now=True)
     theme = models.CharField(max_length=50, verbose_name='theme')
     content = models.TextField(verbose_name='content')
 
@@ -41,6 +43,7 @@ class Mailing(models.Model):
     )
 
     created_at = models.DateTimeField(verbose_name='creation date', auto_now_add=True)
+    changed_at = models.DateTimeField(verbose_name='change date', auto_now=True)
     mailing_time = models.DateTimeField(verbose_name='mailing time')
     frequency = models.IntegerField(default=WEEKLY, choices=PERIODS, verbose_name='mailing frequency')
     mailing_status = models.IntegerField(default=CREATED, choices=MAILING_STATUSES)
