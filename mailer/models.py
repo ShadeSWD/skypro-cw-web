@@ -13,12 +13,26 @@ class Client(models.Model):
     patronymic = models.CharField(max_length=150, verbose_name='patronymic')
     comments = models.TextField(verbose_name='comments')
 
+    class Meta:
+        verbose_name = 'Client'
+        verbose_name_plural = 'Clients'
+
+    def __str__(self):
+        return f'{self.name} {self.patronymic} {self.surname}'
+
 
 class Message(models.Model):
     created_at = models.DateTimeField(verbose_name='creation date', auto_now_add=True)
     changed_at = models.DateTimeField(verbose_name='change date', auto_now=True)
     theme = models.CharField(max_length=50, verbose_name='theme')
     content = models.TextField(verbose_name='content')
+
+    class Meta:
+        verbose_name = 'Message'
+        verbose_name_plural = 'Messages'
+
+    def __str__(self):
+        return f'{self.theme} - {self.pk}'
 
 
 class Mailing(models.Model):
@@ -51,6 +65,13 @@ class Mailing(models.Model):
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='message')
     recipients = models.ManyToManyField(Client, verbose_name='recipients')
 
+    class Meta:
+        verbose_name = 'Mailing'
+        verbose_name_plural = 'Mailings'
+
+    def __str__(self):
+        return f'{self.pk} - {self.mailing_status}'
+
 
 class Log(models.Model):
     SUCCESSFUL = 1
@@ -65,3 +86,10 @@ class Log(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True, verbose_name='timestamp')
     status = models.BooleanField(choices=STATUSES, verbose_name='status')
     response = models.TextField(blank=True, verbose_name='response')
+
+    class Meta:
+        verbose_name = 'Log'
+        verbose_name_plural = 'Logs'
+
+    def __str__(self):
+        return f'{self.timestamp}'
