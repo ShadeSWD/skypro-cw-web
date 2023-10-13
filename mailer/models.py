@@ -44,7 +44,8 @@ class Mailing(models.Model):
 
     created_at = models.DateTimeField(verbose_name='creation date', auto_now_add=True)
     changed_at = models.DateTimeField(verbose_name='change date', auto_now=True)
-    mailing_time = models.DateTimeField(verbose_name='mailing time')
+    start_time = models.DateTimeField(verbose_name='start time')
+    end_time = models.DateTimeField(verbose_name='end time')
     frequency = models.IntegerField(default=WEEKLY, choices=PERIODS, verbose_name='mailing frequency')
     mailing_status = models.IntegerField(default=CREATED, choices=MAILING_STATUSES)
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='message')
