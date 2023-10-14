@@ -70,7 +70,7 @@ class Mailing(models.Model):
         verbose_name_plural = 'Mailings'
 
     def __str__(self):
-        return f'{self.pk} - {self.mailing_status}'
+        return f'{self.pk}'
 
 
 class Log(models.Model):

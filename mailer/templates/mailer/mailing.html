@@ -5,6 +5,8 @@
     <div class="col-6">
       <a class="btn btn-lg btn-block btn-outline-primary" href="/mailer/mailing/{{ mailing.pk }}/update"
          role="button">Update</a>
+      <a class="btn btn-lg btn-block btn-outline-danger" href="/mailer/mailing/{{ mailing.pk }}/delete"
+         role="button">Delete</a>
       <h2>Mailing Details</h2>
       <p>Mailing ID: {{ mailing.pk }}</p>
       <p>Start Time: {{ mailing.start_time }}</p>
