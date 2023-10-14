@@ -1,6 +1,8 @@
 {% extends 'mailer/base.html' %}
 
 {% block content %}
+<a class="btn btn-lg btn-block btn-outline-primary"
+   href="mailing/create" role="button">New mailing</a>
 <h2>Mailing List</h2>
 <ul>
   {% for mailing in mailings %}
