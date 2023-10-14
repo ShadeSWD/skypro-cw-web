@@ -1,0 +1,12 @@
+{% extends 'mailer/base.html' %}
+
+{% block content %}
+<a class="btn btn-lg btn-block btn-outline-primary"
+   href="post/create" role="button">New post</a>
+<h2>Blog</h2>
+<ul>
+  {% for post in posts %}
+    <li><a href="post/{{ post.pk }}">{{ post.created_at }} - {{ post.header }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
