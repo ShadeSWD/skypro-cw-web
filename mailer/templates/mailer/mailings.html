@@ -5,8 +5,8 @@
    href="mailing/create" role="button">New mailing</a>
 <h2>Mailing List</h2>
 <ul>
-  {% for mailing in mailings %}
+    {% for mailing in mailings %}
     <li><a href="mailing/{{ mailing.pk }}">{{ mailing.start_time }} - {{ mailing.end_time }}</a></li>
-  {% endfor %}
+    {% endfor %}
 </ul>
 {% endblock %}
