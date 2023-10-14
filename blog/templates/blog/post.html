@@ -7,7 +7,7 @@
          role="button">Update</a>
       <a class="btn btn-lg btn-block btn-outline-danger" href="/blog/post/{{ post.pk }}/delete"
          role="button">Delete</a>
-      <h2>{{ post.header }}</h2>
+      <h2>{{ post.header | title }}</h2>
       <p>Views: {{ post.views_count }}</p>
       <p>Created: {{ post.created_at }}</p>
       <p>{{ post.content }}</p>

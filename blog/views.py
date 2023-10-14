@@ -8,8 +8,12 @@ from blog.forms import PostForm
 class BlogListView(ListView):
     model = Post
     template_name = "blog/blog.html"
-    context_object_name = 'posts'
-    queryset = Post.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['posts'] = Post.objects.all()
+        context_data['random_3'] = Post.objects.order_by('?')[:3]
+        return context_data
 
 
 class BlogCreateView(CreateView):
