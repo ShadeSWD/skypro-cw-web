@@ -3,11 +3,18 @@
 {% block content %}
 <div class="container">
     <div class="row text-center">
-        <a class="btn btn-lg btn-block btn-outline-primary"
-           href="post/create" role="button">New post</a>
-        <h2>Blog</h2>
-        {% for post in posts %}
-        <div class="col-3">
+        <h2>Home</h2>
+    </div>
+    <div class="col-3">
+        <ul>
+            <li>Total mailings: {{ mailings_total }}</li>
+            <li>Active mailings: {{ mailings_active }}</li>
+            <li>Unique clients: {{ unique_clients }}</li>
+        </ul>
+    </div>
+    <div class="row text-center">
+        {% for post in random_3 %}
+        <div class="col-4">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ post.created_at }}</h4>
