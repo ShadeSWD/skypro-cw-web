@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from blog.models import *
@@ -15,7 +15,7 @@ class BlogListView(ListView):
         return context_data
 
 
-class BlogCreateView(CreateView):
+class BlogCreateView(CreateView, LoginRequiredMixin):
     model = Post
     form_class = PostForm
     template_name = 'blog/post_create.html'
@@ -23,6 +23,7 @@ class BlogCreateView(CreateView):
 
     def form_valid(self, form):
         new_post = form.save()
+        new_post.owner = self.request.user
         new_post.save()
         return super().form_valid(form)
 
