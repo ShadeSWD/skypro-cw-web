@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from blog.models import *
 from blog.forms import PostForm
+from django.http import Http404
 
 
 class BlogListView(ListView):
@@ -54,6 +55,13 @@ class BlogUpdateView(UpdateView):
     template_name = 'blog/post_create.html'
     success_url = reverse_lazy("blog:blog_list")
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        user_groups = [group.name for group in self.request.user.groups.all()]
+        if self.object.owner == self.request.user or 'Managers' in user_groups:
+            return self.object
+        raise Http404
+
     def form_valid(self, form):
         new_post = form.save()
         new_post.save()
@@ -63,3 +71,10 @@ class BlogUpdateView(UpdateView):
 class BlogDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy("blog:blog_list")
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        user_groups = [group.name for group in self.request.user.groups.all()]
+        if self.object.owner == self.request.user or 'Managers' in user_groups:
+            return self.object
+        raise Http404
