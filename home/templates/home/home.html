@@ -1,0 +1,41 @@
+{% extends 'mailer/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <h2>Home</h2>
+    </div>
+    <div class="col-3">
+        <ul>
+            <li>Total mailings: {{ mailings_total }}</li>
+            <li>Active mailings: {{ mailings_active }}</li>
+            <li>Unique clients: {{ unique_clients }}</li>
+        </ul>
+    </div>
+    <div class="row text-center">
+        {% for post in random_3 %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ post.created_at }}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ post.header | title }}</h1>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>{{ post.content | slice:":100"}}...</li>
+                    </ul>
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <a class="btn btn-lg btn-block btn-outline-primary"
+                               href="/blog/post/{{ post.pk }}" role="button">More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

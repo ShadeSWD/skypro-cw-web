@@ -1,0 +1,14 @@
+{% extends 'mailer/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<a class="btn btn-lg btn-block btn-outline-primary"
+   href="mailing/create" role="button">New mailing</a>
+{% endif %}
+<h2>Mailing List</h2>
+<ul>
+    {% for mailing in mailings %}
+    <li><a href="mailing/{{ mailing.pk }}">{{ mailing.start_time }} - {{ mailing.end_time }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

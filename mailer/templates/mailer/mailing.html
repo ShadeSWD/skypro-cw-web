@@ -1,0 +1,27 @@
+{% extends 'mailer/base.html' %}
+
+{% block content %}
+<div class="px-4 ">
+    <div class="col-6">
+        {% if authorised %}
+        <a class="btn btn-lg btn-block btn-outline-primary" href="/mailer/mailing/{{ mailing.pk }}/update"
+           role="button">Update</a>
+        <a class="btn btn-lg btn-block btn-outline-danger" href="/mailer/mailing/{{ mailing.pk }}/delete"
+           role="button">Delete</a>
+        {% endif %}
+        <h2>Mailing Details</h2>
+        <p>Mailing ID: {{ mailing.pk }}</p>
+        <p>Start Time: {{ mailing.start_time }}</p>
+        <p>End Time: {{ mailing.end_time }}</p>
+        <p>Recipients:</p>
+        <ul>
+            {% for recipient in recipients %}
+            <li>{{ recipient.email }}</li>
+            {% endfor %}
+        </ul>
+        <h2>Message ID: {{ mailing.message.theme }}</h2>
+        <p>{{ mailing.message.content }}</p>
+    </div>
+</div>
+
+{% endblock %}
