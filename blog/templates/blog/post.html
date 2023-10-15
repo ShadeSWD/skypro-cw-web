@@ -3,10 +3,12 @@
 {% block content %}
 <div class="px-4 ">
     <div class="col-6">
+        {% if authorised %}
         <a class="btn btn-lg btn-block btn-outline-primary" href="/blog/post/{{ post.pk }}/update"
            role="button">Update</a>
         <a class="btn btn-lg btn-block btn-outline-danger" href="/blog/post/{{ post.pk }}/delete"
            role="button">Delete</a>
+        {% endif %}
         <h2>{{ post.header | title }}</h2>
         <p>Views: {{ post.views_count }}</p>
         <p>Created: {{ post.created_at }}</p>

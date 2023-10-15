@@ -39,6 +39,14 @@ class BlogDetailView(DetailView):
         self.object.save()
         return self.object
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        if self.request.user == self.object.owner:
+            context_data['authorised'] = True
+        else:
+            context_data['authorised'] = False
+        return context_data
+
 
 class BlogUpdateView(UpdateView):
     model = Post
