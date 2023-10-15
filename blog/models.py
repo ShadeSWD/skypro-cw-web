@@ -1,4 +1,5 @@
 from django.db import models
+from config import settings
 
 NULLABLE = {'blank': True, 'null': True}
 
@@ -10,6 +11,7 @@ class Post(models.Model):
     content = models.TextField(verbose_name='content')
     views_count = models.PositiveIntegerField(verbose_name='views count', default=0)
     image = models.ImageField(verbose_name='preview', upload_to='blog_images', null=True, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE)
 
     class Meta:
         verbose_name = 'Post'

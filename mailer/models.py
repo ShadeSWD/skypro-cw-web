@@ -12,6 +12,7 @@ class Client(models.Model):
     surname = models.CharField(max_length=150, verbose_name='surname')
     patronymic = models.CharField(max_length=150, verbose_name='patronymic')
     comments = models.TextField(verbose_name='comments')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE)
 
     class Meta:
         verbose_name = 'Client'
@@ -26,6 +27,7 @@ class Message(models.Model):
     changed_at = models.DateTimeField(verbose_name='change date', auto_now=True)
     theme = models.CharField(max_length=50, verbose_name='theme')
     content = models.TextField(verbose_name='content')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE)
 
     class Meta:
         verbose_name = 'Message'
@@ -64,6 +66,7 @@ class Mailing(models.Model):
     mailing_status = models.IntegerField(default=CREATED, choices=MAILING_STATUSES)
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='message')
     recipients = models.ManyToManyField(Client, verbose_name='recipients')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE)
 
     class Meta:
         verbose_name = 'Mailing'
