@@ -20,14 +20,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(qxf-5uvo$$6sr4ts(7(!p3u$=w&v$wa2gs#)ppkmqixfq7ynn'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-DOMAIN_NAME = "127.0.0.1:8000"
+DOMAIN_NAME = os.getenv('DOMAIN_NAME')
 
 # Application definition
 
@@ -82,9 +82,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'web_blog',
+        'NAME': os.getenv('DATABASES_NAME'),
         'USER': 'postgres',
-        'PASSWORD': os.getenv('pgAdmin'),
+        'PASSWORD': os.getenv('DATABASES_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': 5432,
     }
@@ -147,3 +147,8 @@ EMAIL_USE_TLS = True
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.getenv('CACHES_LOCATION'), }}
